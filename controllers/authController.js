@@ -30,7 +30,6 @@ exports.createUser = asynchandler(async (req, res, next) => {
 
 
 exports.logInUser = asynchandler(async (req, res, next) => {
-    console.log("req.user.token  => ",req.user )
     const user = {
         token : req.user.token,
         id: req.user.id
