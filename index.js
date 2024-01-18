@@ -20,14 +20,18 @@ const cartRouter = require('./routes/cartRoutes');
 const orderRouter = require('./routes/orderRoutes');
 const User = require('./models/userModel');
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+console.log(process.env.MONGODB_URI)
 
 main().catch(err => console.log(err));
 
+
 async function main() {
-    await mongoose.connect('mongodb+srv://Admin:nYfjxlfprAjvxOLp@cluster0.ilwkopa.mongodb.net/Ecommerce?retryWrites=true&w=majority');
+    await mongoose.connect("mongodb+srv://Admin:yDyVZMM0Q9YY03Pv@cluster0.ilwkopa.mongodb.net/Ecommerce?retryWrites=true&w=majority");
     console.log('database connected')
-    // mongodb+srv://Admin:nYfjxlfprAjvxOLp@cluster0.ilwkopa.mongodb.net/Ecommerce?retryWrites=true&w=majority
-    // Password : nYfjxlfprAjvxOLp
 }
 
 
@@ -57,7 +61,6 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false, // don't save session if unmodified
     saveUninitialized: false, // don't create session until something stored
-    // store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
 }));
 
 app.use(passport.authenticate('session'));
@@ -140,10 +143,10 @@ passport.deserializeUser(function (user, cb) {
 });
 
 
-// app.get('/', (req, res) => {
-//     res.send({ status: 'running' })
-// })
-
-app.listen(8000, () => {
-    console.log('server listening')
+app.get('/', (req, res) => {
+    res.send({ status: 'running' })
 })
+
+app.listen(3001, () => {
+    console.log('server listening')
+});

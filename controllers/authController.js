@@ -18,7 +18,11 @@ exports.createUser = asynchandler(async (req, res, next) => {
                         res.status(400).json(err);
                     } else {
                         const token = jwt.sign({ id: doc.id, role: doc.role }, SECRET_KEY);
-                        res.cookie('jwt', token, { expires: new Date(Date.now() + 3600000), httpOnly: true }).status(200).json({token});
+                        const user = {
+                            token : token,
+                            id: doc.id
+                        }
+                        res.cookie('jwt', token, { expires: new Date(Date.now() + 3600000), httpOnly: true }).status(200).json(user);
                     }
                 })
 
