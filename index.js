@@ -69,7 +69,7 @@ app.use(express.static('build'))
 
 app.use(cors({
     exposedHeaders: ['X-Total-Count'],
-    origin: ["https://deploy-mern-api.vercel.app"],
+    origin: ["https://ecommerce-mern-tau.vercel.app"],
     methods: ["POST", "GET", "PATCH", "DELETE"],
     credentials: true
 }
