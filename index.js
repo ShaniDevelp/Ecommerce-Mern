@@ -43,7 +43,7 @@ function isAuth(req, res, done) {
 const SECRET_KEY = "SECRET_KEY";
 
 
-const cookieExtractor = function(req) {
+const cookieExtractor = function (req) {
     let token = null;
     if (req && req.cookies) {
         token = req.cookies['jwt'];
@@ -68,8 +68,12 @@ app.use(express.static('build'))
 
 
 app.use(cors({
-    exposedHeaders: ['X-Total-Count']
-}));
+    exposedHeaders: ['X-Total-Count'],
+    origin: ["https://deploy-mern-api.vercel.app"],
+    methods: ["POST", "GET", "PATCH", "DELETE"],
+    credentials: true
+}
+));
 app.use(express.json());
 
 app.use('/products', productRouter);
@@ -79,11 +83,11 @@ app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/cart', cartRouter);
 app.use('/orders', orderRouter);
-app.use('*',(req, res)=>{
+app.use('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
-} )
+})
 
-passport.use('local', new LocalStrategy({usernameField: 'email'},
+passport.use('local', new LocalStrategy({ usernameField: 'email' },
     async function (email, password, done) {
         try {
             const user = await User.findOne({ email: email }).exec();
@@ -96,10 +100,10 @@ passport.use('local', new LocalStrategy({usernameField: 'email'},
                         if (!crypto.timingSafeEqual(user.password, hashedPassword)) {
                             done(null, false, { message: 'invalid credentials' })
                         } else {
-                            const token = jwt.sign({id: user.id, role:user.role}, SECRET_KEY);
+                            const token = jwt.sign({ id: user.id, role: user.role }, SECRET_KEY);
                             const id = user.id
-                            done(null, {token, id })
-                            console.log("token =>" ,token)
+                            done(null, { token, id })
+                            console.log("token =>", token)
                         }
                     })
             }
