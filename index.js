@@ -69,9 +69,6 @@ app.use(express.static('build'))
 
 app.use(cors({
     exposedHeaders: ['X-Total-Count'],
-    origin: ["https://deploy-mern-api.vercel.app"],
-    methods: ["POST", "GET", "PATCH", "DELETE"],
-    credentials: true
 }
 ));
 app.use(express.json());
