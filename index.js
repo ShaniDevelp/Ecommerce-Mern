@@ -30,7 +30,7 @@ main().catch(err => console.log(err));
 
 
 async function main() {
-    await mongoose.connect("mongodb+srv://Admin:yDyVZMM0Q9YY03Pv@cluster0.ilwkopa.mongodb.net/Ecommerce?retryWrites=true&w=majority");
+    await mongoose.connect("mongodb+srv://Admin:wWeNpL9qCSaya4DZ@cluster0.ilwkopa.mongodb.net/Ecommerce?retryWrites=true&w=majority");
     console.log('database connected')
 }
 
